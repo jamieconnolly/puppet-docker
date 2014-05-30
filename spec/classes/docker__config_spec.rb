@@ -14,7 +14,7 @@ describe "docker::config" do
     "ip"         => "127.0.0.1",
     "port"       => "14243",
 
-    "service"    => "dev.docker",
+    "service"    => "dev.docker"
   } }
 
   it do
