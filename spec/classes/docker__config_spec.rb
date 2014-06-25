@@ -12,7 +12,7 @@ describe "docker::config" do
     "user"       => "docker",
 
     "ip"         => "127.0.0.1",
-    "port"       => "14243",
+    "port"       => "12375",
 
     "service"    => "dev.docker"
   } }

@@ -1,0 +1,10 @@
+---
+docker::configdir:  '/etc/docker'
+docker::datadir:    '/data/docker'
+docker::logdir:     '/var/log/docker'
+docker::user:       'docker'
+
+docker::package:    'lxc-docker'
+docker::version:    'installed'
+
+docker::service:    'docker'
