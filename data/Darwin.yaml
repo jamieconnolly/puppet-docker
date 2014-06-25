@@ -1,0 +1,14 @@
+---
+docker::configdir:  "%{::boxen::config::configdir}/docker"
+docker::datadir:    "%{::boxen::config::datadir}/docker"
+docker::executable: "%{::boxen::config::homebrewdir}/bin/boot2docker"
+docker::logdir:     "%{::boxen::config::logdir}/docker"
+docker::user:       "%{::boxen_user}"
+
+docker::ip:         '127.0.0.1'
+docker::port:       '12375'
+
+docker::package:    'boxen/brews/boot2docker'
+docker::version:    '1.0.1-boxen1'
+
+docker::service:    'dev.docker'
