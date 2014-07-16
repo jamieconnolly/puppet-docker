@@ -9,6 +9,6 @@ docker::ip:         '127.0.0.1'
 docker::port:       '12375'
 
 docker::package:    'boxen/brews/boot2docker'
-docker::version:    '1.1.0-boxen1'
+docker::version:    '1.1.1-boxen1'
 
 docker::service:    'dev.docker'
