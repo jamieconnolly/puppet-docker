@@ -45,6 +45,10 @@ class docker(
     $enable,
   )
 
+  if $::operatingsystem == 'Darwin' {
+    include virtualbox
+  }
+
   class { 'docker::config':
     ensure     => $ensure,
 
