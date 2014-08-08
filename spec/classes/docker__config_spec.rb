@@ -35,7 +35,7 @@ describe "docker::config" do
       it do
         should contain_boxen__env_script("docker").with_ensure("present")
         should contain_file("/test/boxen/config/docker/profile").with_ensure("present")
-        # should contain_file("/Library/LaunchDaemons/dev.docker.plist").with_ensure("present")
+        should contain_file("/Library/LaunchDaemons/dev.docker.plist").with_ensure("present")
       end
     end
 
@@ -45,7 +45,7 @@ describe "docker::config" do
       it do
         should contain_boxen__env_script("docker").with_ensure("absent")
         should contain_file("/test/boxen/config/docker/profile").with_ensure("absent")
-        # should contain_file("/Library/LaunchDaemons/dev.docker.plist").with_ensure("absent")
+        should contain_file("/Library/LaunchDaemons/dev.docker.plist").with_ensure("absent")
       end
     end
   end
@@ -56,7 +56,7 @@ describe "docker::config" do
     it do
       should_not contain_boxen__env_script("docker")
       should_not contain_file("/test/boxen/config/docker/profile")
-      # should_not contain_file("/Library/LaunchDaemons/dev.docker.plist")
+      should_not contain_file("/Library/LaunchDaemons/dev.docker.plist")
     end
   end
 end

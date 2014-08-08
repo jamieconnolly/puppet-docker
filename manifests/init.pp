@@ -13,9 +13,6 @@ class docker(
   $logdir = undef,
   $user = undef,
 
-  $ip = undef,
-  $port = undef,
-
   $package = undef,
   $version = undef,
 
@@ -31,9 +28,6 @@ class docker(
     $executable,
     $logdir,
     $user,
-
-    $ip,
-    $port,
 
     $package,
     $version,
@@ -54,11 +48,8 @@ class docker(
     logdir     => $logdir,
     user       => $user,
 
-    ip         => $ip,
-    port       => $port,
-
     service    => $service,
-    # notify     => Service['docker'],
+    notify     => Service['docker'],
   }
 
   ~>
@@ -71,10 +62,16 @@ class docker(
 
   ~>
   class { 'docker::service':
-    ensure  => $ensure,
+    ensure    => $ensure,
 
-    service => $service,
-    enable  => $enable,
+    configdir => $configdir,
+    datadir   => $datadir,
+    user      => $user,
+
+    version   => $version,
+
+    service   => $service,
+    enable    => $enable,
   }
 
 }

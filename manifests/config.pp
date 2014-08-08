@@ -9,9 +9,6 @@ class docker::config(
   $logdir = undef,
   $user = undef,
 
-  $ip = undef,
-  $port = undef,
-
   $service = undef,
 ) {
 
@@ -45,11 +42,11 @@ class docker::config(
       content => template('docker/darwin/profile.erb'),
     }
 
-    # file { "/Library/LaunchDaemons/${service}.plist":
-      # content => template('docker/darwin/docker.plist.erb'),
-      # group   => 'wheel',
-      # owner   => 'root',
-    # }
+    file { "/Library/LaunchDaemons/${service}.plist":
+      content => template('docker/darwin/dev.docker.plist.erb'),
+      group   => 'wheel',
+      owner   => 'root',
+    }
   }
 
 }
