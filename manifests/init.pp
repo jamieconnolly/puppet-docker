@@ -45,10 +45,6 @@ class docker(
     $enable,
   )
 
-  if $::operatingsystem == 'Darwin' {
-    include virtualbox
-  }
-
   class { 'docker::config':
     ensure     => $ensure,
 
@@ -62,7 +58,7 @@ class docker(
     port       => $port,
 
     service    => $service,
-    notify     => Service['docker'],
+    # notify     => Service['docker'],
   }
 
   ~>
@@ -76,9 +72,6 @@ class docker(
   ~>
   class { 'docker::service':
     ensure  => $ensure,
-
-    datadir => $datadir,
-    port    => $port,
 
     service => $service,
     enable  => $enable,
