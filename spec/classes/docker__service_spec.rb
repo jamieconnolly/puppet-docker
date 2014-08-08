@@ -38,7 +38,7 @@ describe "docker::service" do
   describe "Darwin" do
     context "ensure => present" do
       it do
-        should contain_exec("boot2docker").with({
+        should contain_exec("init-boot2docker-vm").with({
           :command     => "boot2docker init",
           :environment => [
             "BOOT2DOCKER_DIR=/test/boxen/data/docker",
@@ -46,10 +46,11 @@ describe "docker::service" do
           ],
           :require     => "Package[boxen/brews/boot2docker]",
           :user        => "testuser",
-          :unless      => "boot2docker status | grep \"machine does not exist\"",
+          :unless      => "boot2docker status",
           :before      => "Service[docker]",
           :notify      => "Service[docker]",
         })
+        should_not contain_exec("delete-boot2docker-vm")
       end
     end
 
@@ -57,15 +58,16 @@ describe "docker::service" do
       let(:params) { test_params.merge(:ensure => "absent") }
 
       it do
-        should contain_exec("boot2docker").with({
+        should_not contain_exec("init-boot2docker-vm")
+        should contain_exec("delete-boot2docker-vm").with({
           :command     => "boot2docker delete",
           :environment => [
             "BOOT2DOCKER_DIR=/test/boxen/data/docker",
             "BOOT2DOCKER_PROFILE=/test/boxen/config/docker/profile"
           ],
+          :onlyif      => "boot2docker status",
           :require     => "Package[boxen/brews/boot2docker]",
           :user        => "testuser",
-          :unless      => "boot2docker status",
           :before      => "Service[docker]",
           :notify      => "Service[docker]",
         })

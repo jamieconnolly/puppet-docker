@@ -19,24 +19,26 @@ class docker::service(
   }
 
   if $::operatingsystem == 'Darwin' {
-    $command = $ensure ? {
-      present => 'boot2docker init',
-      default => 'boot2docker delete',
-    }
-
-    $unless = $ensure ? {
-      present => 'boot2docker status | grep "machine does not exist"',
-      default => 'boot2docker status',
-    }
-
-    exec { 'boot2docker':
-      command     => $command,
-      environment => ["BOOT2DOCKER_DIR=${datadir}", "BOOT2DOCKER_PROFILE=${configdir}/profile"],
-      require     => Package['boxen/brews/boot2docker'],
-      user        => $user,
-      unless      => $unless,
-      before      => Service['docker'],
-      notify      => Service['docker'];
+    if $ensure == 'present' {
+      exec { 'init-boot2docker-vm':
+        command     => 'boot2docker init',
+        environment => ["BOOT2DOCKER_DIR=${datadir}", "BOOT2DOCKER_PROFILE=${configdir}/profile"],
+        require     => Package['boxen/brews/boot2docker'],
+        user        => $user,
+        unless      => 'boot2docker status',
+        before      => Service['docker'],
+        notify      => Service['docker'];
+      }
+    } elsif $ensure == 'absent' {
+      exec { 'delete-boot2docker-vm':
+        command     => 'boot2docker delete',
+        environment => ["BOOT2DOCKER_DIR=${datadir}", "BOOT2DOCKER_PROFILE=${configdir}/profile"],
+        onlyif      => 'boot2docker status',
+        require     => Package['boxen/brews/boot2docker'],
+        user        => $user,
+        before      => Service['docker'],
+        notify      => Service['docker'];
+      }
     }
   }
 
