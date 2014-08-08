@@ -11,10 +11,10 @@ end
 
 def default_test_facts
   {
-    :boxen_home   => "/test/boxen",
-    :boxen_srcdir => "/test/boxen/src",
-    :boxen_user   => "testuser",
-
-    :ipaddress => "127.0.0.1"
+    :boxen_home      => "/test/boxen",
+    :boxen_srcdir    => "/test/boxen/src",
+    :boxen_user      => "testuser",
+    :ipaddress       => "127.0.0.1",
+    :operatingsystem => "Darwin",
   }
 end

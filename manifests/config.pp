@@ -29,6 +29,7 @@ class docker::config(
           $datadir,
           $logdir]:
     ensure => $dir_ensure,
+    force  => true,
     links  => follow,
   }
 
@@ -44,11 +45,11 @@ class docker::config(
       content => template('docker/darwin/profile.erb'),
     }
 
-    file { "/Library/LaunchDaemons/${service}.plist":
-      content => template('docker/darwin/docker.plist.erb'),
-      group   => 'wheel',
-      owner   => 'root',
-    }
+    # file { "/Library/LaunchDaemons/${service}.plist":
+      # content => template('docker/darwin/docker.plist.erb'),
+      # group   => 'wheel',
+      # owner   => 'root',
+    # }
   }
 
 }
