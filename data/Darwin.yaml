@@ -5,9 +5,6 @@ docker::executable: "%{::boxen::config::homebrewdir}/bin/boot2docker"
 docker::logdir:     "%{::boxen::config::logdir}/docker"
 docker::user:       "%{::boxen_user}"
 
-docker::ip:         '192.168.59.103'
-docker::port:       '12375'
-
 docker::package:    'boxen/brews/docker'
 docker::version:    '1.1.2-boxen1'
 
