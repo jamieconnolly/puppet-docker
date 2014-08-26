@@ -4,7 +4,7 @@ describe "docker::package" do
   let(:test_params) { {
     :ensure  => "present",
     :package => "boxen/brews/docker",
-    :version => "1.1.2-boxen1",
+    :version => "1.0.0-boxen1",
   } }
 
   let(:facts) { default_test_facts }
@@ -12,7 +12,7 @@ describe "docker::package" do
 
   context "ensure => present" do
     it do
-      should contain_package("boxen/brews/docker").with_ensure("1.1.2-boxen1")
+      should contain_package("boxen/brews/docker").with_ensure("1.0.0-boxen1")
     end
   end
 
@@ -29,7 +29,7 @@ describe "docker::package" do
       it do
         should contain_homebrew__formula("boot2docker").with_before('Package[boxen/brews/docker]')
         should contain_homebrew__formula("docker").with_before('Package[boxen/brews/docker]')
-        should contain_package("boxen/brews/boot2docker").with_ensure("1.1.2-boxen1")
+        should contain_package("boxen/brews/boot2docker").with_ensure("1.0.0-boxen1")
       end
     end
 

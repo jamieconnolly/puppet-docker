@@ -6,6 +6,6 @@ docker::logdir:     "%{::boxen::config::logdir}/docker"
 docker::user:       "%{::boxen_user}"
 
 docker::package:    'boxen/brews/docker'
-docker::version:    '1.1.2-boxen1'
+docker::version:    '1.2.0-boxen1'
 
 docker::service:    'dev.docker'
