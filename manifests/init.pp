@@ -9,15 +9,9 @@ class docker(
 
   $configdir = undef,
   $datadir = undef,
-  $executable = undef,
-  $logdir = undef,
-  $user = undef,
-
   $package = undef,
+  $user = undef,
   $version = undef,
-
-  $service = undef,
-  $enable = undef,
 ) {
 
   validate_string(
@@ -25,18 +19,9 @@ class docker(
 
     $configdir,
     $datadir,
-    $executable,
-    $logdir,
-    $user,
-
     $package,
+    $user,
     $version,
-
-    $service,
-  )
-
-  validate_bool(
-    $enable,
   )
 
   class { 'docker::config':
@@ -44,12 +29,7 @@ class docker(
 
     configdir  => $configdir,
     datadir    => $datadir,
-    executable => $executable,
-    logdir     => $logdir,
     user       => $user,
-
-    service    => $service,
-    notify     => Service['docker'],
   }
 
   ~>
@@ -58,20 +38,6 @@ class docker(
 
     package => $package,
     version => $version,
-  }
-
-  ~>
-  class { 'docker::service':
-    ensure    => $ensure,
-
-    configdir => $configdir,
-    datadir   => $datadir,
-    user      => $user,
-
-    version   => $version,
-
-    service   => $service,
-    enable    => $enable,
   }
 
 }
