@@ -14,6 +14,7 @@ include docker
 * `homebrew`
 * `ripienaar/puppet-module-data`
 * `stdlib`
+* `virtualbox`
 
 ## Development
 

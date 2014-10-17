@@ -28,7 +28,7 @@ describe "docker::config" do
     end
   end
 
-  describe "Darwin" do
+  describe "osfamily => Darwin" do
     context "ensure => present" do
       it do
         should contain_boxen__env_script("docker").with_ensure("present")
@@ -46,8 +46,8 @@ describe "docker::config" do
     end
   end
 
-  describe "Ubuntu" do
-    let(:facts) { default_test_facts.merge(:operatingsystem => "Ubuntu") }
+  describe "osfamily => Debian" do
+    let(:facts) { default_test_facts.merge(:osfamily => "Debian") }
 
     it do
       should_not contain_boxen__env_script("docker")

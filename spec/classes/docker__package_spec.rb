@@ -24,11 +24,12 @@ describe "docker::package" do
     end
   end
 
-  describe "Darwin" do
+  describe "osfamily => Darwin" do
     context "ensure => present" do
       it do
-        should contain_homebrew__formula("boot2docker").with_before('Package[boxen/brews/docker]')
-        should contain_homebrew__formula("docker").with_before('Package[boxen/brews/docker]')
+        should contain_homebrew__formula("boot2docker")
+        should contain_homebrew__formula("docker")
+
         should contain_package("boxen/brews/boot2docker").with_ensure("1.0.0-boxen1")
       end
     end
@@ -42,8 +43,8 @@ describe "docker::package" do
     end
   end
 
-  describe "Ubuntu" do
-    let(:facts) { default_test_facts.merge(:operatingsystem => "Ubuntu") }
+  describe "osfamily => Debian" do
+    let(:facts) { default_test_facts.merge(:osfamily => "Debian") }
 
     it do
       should_not contain_homebrew__formula("boot2docker")

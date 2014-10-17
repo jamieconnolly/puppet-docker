@@ -6,11 +6,11 @@ class Boot2docker < Formula
 
   version "1.3.0-boxen1"
 
-  # bottle do
-    # sha1 "" => :mavericks
-    # sha1 "" => :mountain_lion
-    # sha1 "" => :lion
-  # end
+  bottle do
+    sha1 "891132f91b6af4cba058c92cecd41287d2e1fc6d" => :mavericks
+    sha1 "ec3342d2c6378aa6725eed021fd6cc801da79d31" => :mountain_lion
+    sha1 "5c651fe2047ea0cd0512722d278631d39b6a19f8" => :lion
+  end
 
   depends_on "boxen/brews/docker" => :recommended
   depends_on "go" => :build

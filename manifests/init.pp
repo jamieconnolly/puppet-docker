@@ -6,7 +6,6 @@
 
 class docker(
   $ensure = undef,
-
   $configdir = undef,
   $datadir = undef,
   $package = undef,
@@ -16,7 +15,6 @@ class docker(
 
   validate_string(
     $ensure,
-
     $configdir,
     $datadir,
     $package,
@@ -24,9 +22,13 @@ class docker(
     $version,
   )
 
+  if $::osfamily == 'Darwin' {
+    include boxen::config
+    include virtualbox
+  }
+
   class { 'docker::config':
     ensure     => $ensure,
-
     configdir  => $configdir,
     datadir    => $datadir,
     user       => $user,
@@ -35,7 +37,6 @@ class docker(
   ~>
   class { 'docker::package':
     ensure  => $ensure,
-
     package => $package,
     version => $version,
   }
