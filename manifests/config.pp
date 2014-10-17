@@ -2,7 +2,6 @@
 
 class docker::config(
   $ensure = undef,
-
   $configdir = undef,
   $datadir = undef,
   $user = undef,
@@ -25,7 +24,7 @@ class docker::config(
     links  => follow,
   }
 
-  if $::operatingsystem == 'Darwin' {
+  if $::osfamily == 'Darwin' {
     boxen::env_script { 'docker':
       ensure   => $ensure,
       content  => template('docker/darwin/env.sh.erb'),
