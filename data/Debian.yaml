@@ -1,6 +1,0 @@
----
-docker::configdir:  '/etc/docker'
-docker::datadir:    '/data/docker'
-docker::package:    'lxc-docker'
-docker::user:       'docker'
-docker::version:    'installed'
