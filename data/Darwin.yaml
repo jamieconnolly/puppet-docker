@@ -3,4 +3,4 @@ docker::configdir:  "%{::boxen::config::configdir}/docker"
 docker::datadir:    "%{::boxen::config::datadir}/docker"
 docker::package:    'boxen/brews/docker'
 docker::user:       "%{::boxen_user}"
-docker::version:    '1.3.0-boxen1'
+docker::version:    '1.3.1-boxen1'
