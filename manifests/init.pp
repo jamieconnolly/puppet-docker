@@ -24,7 +24,6 @@ class docker(
 
   if $::osfamily == 'Darwin' {
     include boxen::config
-    include virtualbox
   }
 
   class { 'docker::config':

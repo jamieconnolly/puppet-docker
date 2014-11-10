@@ -8,8 +8,6 @@ describe "docker" do
   } }
 
   it do
-    should include_class("virtualbox")
-
     should contain_class("docker::config")
     should contain_class("docker::package")
   end
