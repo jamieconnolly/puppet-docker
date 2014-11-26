@@ -2,14 +2,14 @@ require "formula"
 
 class Boot2docker < Formula
   homepage "https://github.com/boot2docker/boot2docker-cli"
-  url "https://github.com/boot2docker/boot2docker-cli.git", :tag => "v1.3.1"
+  url "https://github.com/boot2docker/boot2docker-cli.git", :tag => "v1.3.2"
 
-  version "1.3.1-boxen1"
+  version "1.3.2-boxen1"
 
   bottle do
-    sha1 "becdb32043b9a40e8251120672d3a637ab5cb476" => :yosemite
-    sha1 "c7f4216d9049d23ef77c0a91311d8656b9b90d64" => :mavericks
-    sha1 "17a608549bf7adb4cae2180388a0c83f21dcdee6" => :mountain_lion
+    sha1 "a549d80b04ba8702e96216e35edfc135850be122" => :yosemite
+    sha1 "0aa43fdb1a2b91a1b72e456e2450b2e6e8f16d10" => :mavericks
+    sha1 "45d8c0d08597f4dab63fad2379a225a5d41e3288" => :mountain_lion
   end
 
   depends_on "boxen/brews/docker" => :recommended
