@@ -1,6 +1,9 @@
 ---
 docker::configdir:  "%{::boxen::config::configdir}/docker"
 docker::datadir:    "%{::boxen::config::datadir}/docker"
+docker::executable: "%{::boxen::config::homebrewdir}/bin/boot2docker"
+docker::logdir:     "%{::boxen::config::logdir}/docker"
 docker::package:    'boxen/brews/docker'
+docker::service:    'dev.docker'
 docker::user:       "%{::boxen_user}"
 docker::version:    '1.3.2-boxen1'

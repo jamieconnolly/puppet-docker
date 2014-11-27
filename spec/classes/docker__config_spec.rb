@@ -5,6 +5,8 @@ describe "docker::config" do
     :ensure    => "present",
     :configdir => "/test/boxen/config/docker",
     :datadir   => "/test/boxen/data/docker",
+    :logdir    => "/test/boxen/log/docker",
+    :service   => "dev.docker",
   } }
 
   let(:facts) { default_test_facts }
@@ -12,7 +14,7 @@ describe "docker::config" do
 
   context "ensure => present" do
     it do
-      %w(config data).each do |d|
+      %w(config data log).each do |d|
         should contain_file("/test/boxen/#{d}/docker").with_ensure(:directory)
       end
     end
@@ -22,7 +24,7 @@ describe "docker::config" do
     let(:params) { test_params.merge(:ensure => "absent") }
 
     it do
-      %w(config data).each do |d|
+      %w(config data log).each do |d|
         should contain_file("/test/boxen/#{d}/docker").with_ensure("absent")
       end
     end
@@ -33,6 +35,7 @@ describe "docker::config" do
       it do
         should contain_boxen__env_script("docker").with_ensure("present")
         should contain_file("/test/boxen/config/docker/profile").with_ensure("present")
+        should contain_file("/Library/LaunchDaemons/dev.docker.plist").with_ensure("present")
       end
     end
 
@@ -42,6 +45,7 @@ describe "docker::config" do
       it do
         should contain_boxen__env_script("docker").with_ensure("absent")
         should contain_file("/test/boxen/config/docker/profile").with_ensure("absent")
+        should contain_file("/Library/LaunchDaemons/dev.docker.plist").with_ensure("absent")
       end
     end
   end
@@ -52,6 +56,7 @@ describe "docker::config" do
     it do
       should_not contain_boxen__env_script("docker")
       should_not contain_file("/test/boxen/config/docker/profile")
+      should_not contain_file("/Library/LaunchDaemons/dev.docker.plist")
     end
   end
 end

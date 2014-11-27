@@ -4,6 +4,9 @@ class docker::config(
   $ensure = undef,
   $configdir = undef,
   $datadir = undef,
+  $executable = undef,
+  $logdir = undef,
+  $service = undef,
   $user = undef,
 ) {
 
@@ -18,7 +21,8 @@ class docker::config(
   }
 
   file { [$configdir,
-          $datadir]:
+          $datadir,
+          $logdir]:
     ensure => $dir_ensure,
     force  => true,
     links  => follow,
@@ -32,8 +36,13 @@ class docker::config(
     }
 
     file { "${configdir}/profile":
-      ensure  => $ensure,
       content => template('docker/darwin/profile.erb'),
+    }
+
+    file { "/Library/LaunchDaemons/${service}.plist":
+      content => template('docker/darwin/dev.docker.plist.erb'),
+      group   => 'wheel',
+      owner   => 'root',
     }
   }
 

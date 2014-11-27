@@ -1,2 +1,3 @@
 ---
+docker::enable:     true
 docker::ensure:     present
