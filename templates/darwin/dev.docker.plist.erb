@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string><%= @service %></string>
+
+    <key>Boxen</key>
+    <dict>
+      <key>Description</key>
+      <string>Docker, the open-source application container engine.</string>
+    </dict>
+
+    <key>ProgramArguments</key>
+    <array>
+      <string><%= @executable %></string>
+      <string>start</string>
+    </array>
+
+    <key>RunAtLoad</key>
+    <true />
+
+    <key>UserName</key>
+    <string><%= @user %></string>
+
+    <key>WorkingDirectory</key>
+    <string><%= @datadir %></string>
+
+    <key>StandardErrorPath</key>
+    <string><%= @logdir %>/console.log</string>
+
+    <key>StandardOutPath</key>
+    <string><%= @logdir %>/console.log</string>
+  </dict>
+</plist>
