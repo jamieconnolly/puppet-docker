@@ -48,7 +48,7 @@ describe "docker::service" do
             "BOOT2DOCKER_PROFILE=/test/boxen/config/docker/profile"
           ],
           :user        => "testuser",
-          :unless      => "boot2docker status | grep \"machine not exist\"",
+          :unless      => "boot2docker status",
         })
       end
     end
@@ -64,7 +64,6 @@ describe "docker::service" do
             "BOOT2DOCKER_PROFILE=/test/boxen/config/docker/profile"
           ],
           :user        => "testuser",
-          :unless      => "boot2docker status",
         })
       end
     end

@@ -11,6 +11,14 @@
       <string>Docker, the open-source application container engine.</string>
     </dict>
 
+    <key>EnvironmentVariables</key>
+    <dict>
+      <key>BOOT2DOCKER_DIR</key>
+      <string><%= @datadir %></string>
+      <key>BOOT2DOCKER_PROFILE</key>
+      <string><%= @configdir %>/profile</string>
+    </dict>
+
     <key>ProgramArguments</key>
     <array>
       <string><%= @executable %></string>
