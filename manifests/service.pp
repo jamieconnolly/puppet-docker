@@ -21,8 +21,8 @@ class docker::service(
     }
 
     $unless = $ensure ? {
-      present => 'boot2docker status | grep "machine not exist"',
-      default => 'boot2docker status',
+      present => 'boot2docker status',
+      default => undef,
     }
 
     exec { 'boot2docker-vm':
