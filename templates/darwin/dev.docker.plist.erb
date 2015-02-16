@@ -21,7 +21,7 @@
 
     <key>ProgramArguments</key>
     <array>
-      <string><%= @executable %></string>
+      <string><%= scope.lookupvar "boxen::config::homebrewdir" %>/bin/boot2docker</string>
       <string>start</string>
     </array>
 

@@ -4,7 +4,6 @@ class docker::config(
   $ensure = undef,
   $configdir = undef,
   $datadir = undef,
-  $executable = undef,
   $logdir = undef,
   $service = undef,
   $user = undef,

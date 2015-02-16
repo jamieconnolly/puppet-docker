@@ -11,19 +11,14 @@ class docker::package(
     default => absent,
   }
 
-  if $::osfamily == 'Darwin' {
-    homebrew::formula { 'docker': }
-  }
-
   package { $package:
     ensure => $package_ensure
   }
 
   if $::osfamily == 'Darwin' {
-    homebrew::formula { 'boot2docker': }
-
-    package { 'boxen/brews/boot2docker':
-      ensure => $package_ensure
+    package { 'boot2docker':
+      ensure   => $package_ensure,
+      provider => homebrew,
     }
   }
 
