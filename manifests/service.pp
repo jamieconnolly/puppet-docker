@@ -28,7 +28,7 @@ class docker::service(
     exec { 'boot2docker-vm':
       command     => $command,
       environment => ["BOOT2DOCKER_DIR=${datadir}", "BOOT2DOCKER_PROFILE=${configdir}/profile"],
-      require     => Package['boxen/brews/boot2docker'],
+      require     => Package['boot2docker'],
       user        => $user,
       unless      => $unless,
       before      => Service['docker'],
