@@ -1,10 +1,16 @@
 ---
-docker::package:    docker
-docker::version:    1.5.0
+docker::compose::package: docker-compose
+docker::compose::version: 1.4.2
+docker::engine::package:  docker
+docker::engine::version:  1.8.3
+docker::machine::package: docker-machine
+docker::machine::version: 0.4.1
+docker::swarm::package:   docker-swarm
+docker::swarm::version:   0.4.0
 
-docker::configdir:  "%{::boxen::config::configdir}/docker"
-docker::datadir:    "%{::boxen::config::datadir}/docker"
-docker::logdir:     "%{::boxen::config::logdir}/docker"
-
-docker::service:    dev.docker
-docker::user:       "%{::boxen_user}"
+docker::configdir:    "%{::boxen::config::configdir}/docker"
+docker::datadir:      "%{::boxen::config::datadir}/docker"
+docker::logdir:       "%{::boxen::config::logdir}/docker"
+docker::machinename:  "local"
+docker::service:      "dev.docker"
+docker::user:         "%{::boxen_user}"
