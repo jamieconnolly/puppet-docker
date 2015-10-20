@@ -1,8 +1,9 @@
-# Public: Install and configure docker
+# Public: Install and configure Docker
 #
 # Examples
 #
 #   include docker
+#
 
 class docker(
   $ensure = undef,
@@ -10,10 +11,9 @@ class docker(
   $datadir = undef,
   $enable = undef,
   $logdir = undef,
-  $package = undef,
+  $machinename = undef,
   $service = undef,
   $user = undef,
-  $version = undef,
 ) {
 
   validate_string(
@@ -21,10 +21,9 @@ class docker(
     $configdir,
     $datadir,
     $logdir,
-    $package,
+    $machinename,
     $service,
     $user,
-    $version,
   )
   validate_bool($enable)
 
@@ -33,29 +32,34 @@ class docker(
   }
 
   class { 'docker::config':
-    ensure     => $ensure,
-    configdir  => $configdir,
-    datadir    => $datadir,
-    logdir     => $logdir,
-    service    => $service,
-    user       => $user,
+    ensure      => $ensure,
+    configdir   => $configdir,
+    datadir     => $datadir,
+    logdir      => $logdir,
+    machinename => $machinename,
+    user        => $user,
   }
 
   ~>
-  class { 'docker::package':
-    ensure  => $ensure,
-    package => $package,
-    version => $version,
+  class { [
+    'docker::compose',
+    'docker::engine',
+    'docker::machine',
+    'docker::swarm',
+  ]:
+    ensure      => $ensure,
   }
 
   ~>
   class { 'docker::service':
-    ensure    => $ensure,
-    configdir => $configdir,
-    datadir   => $datadir,
-    enable    => $enable,
-    service   => $service,
-    user      => $user,
+    ensure      => $ensure,
+    configdir   => $configdir,
+    datadir     => $datadir,
+    enable      => $enable,
+    logdir      => $logdir,
+    machinename => $machinename,
+    service     => $service,
+    user        => $user,
   }
 
 }

@@ -1,6 +1,6 @@
-# Internal: Install the docker package
+# Internal: Install Docker Engine
 
-class docker::package(
+class docker::engine(
   $ensure = undef,
   $package = undef,
   $version = undef,
@@ -13,13 +13,6 @@ class docker::package(
 
   package { $package:
     ensure => $package_ensure
-  }
-
-  if $::osfamily == 'Darwin' {
-    package { 'boot2docker':
-      ensure   => $package_ensure,
-      provider => homebrew,
-    }
   }
 
 }

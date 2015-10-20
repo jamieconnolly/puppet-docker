@@ -1,10 +1,12 @@
-# Internal: Manage the docker service
+# Internal: Manage the Docker service
 
 class docker::service(
   $ensure = undef,
   $configdir = undef,
   $datadir = undef,
   $enable = undef,
+  $logdir = undef,
+  $machinename = undef,
   $service = undef,
   $user = undef,
 ) {
@@ -15,24 +17,38 @@ class docker::service(
   }
 
   if $::osfamily == 'Darwin' {
+    include boxen::config
+
+    $executable = "${boxen::config::homebrewdir}/bin/docker-machine"
+
     $command = $ensure ? {
-      present => 'boot2docker init',
-      default => 'boot2docker delete',
+      present => "${executable} create --driver=virtualbox ${machinename}",
+      default => "${executable} rm ${machinename}",
     }
 
     $unless = $ensure ? {
-      present => 'boot2docker status',
+      present => "${executable} status ${machinename}",
       default => undef,
     }
 
-    exec { 'boot2docker-vm':
+    exec { 'docker-machine create':
       command     => $command,
-      environment => ["BOOT2DOCKER_DIR=${datadir}", "BOOT2DOCKER_PROFILE=${configdir}/profile"],
-      require     => Package['boot2docker'],
+      environment => [
+        "DOCKER_CONFIG=${configdir}",
+        "MACHINE_STORAGE_PATH=${datadir}",
+      ],
       user        => $user,
       unless      => $unless,
       before      => Service['docker'],
       notify      => Service['docker'];
+    }
+
+    file { "/Library/LaunchDaemons/${service}.plist":
+      ensure  => $ensure,
+      content => template('docker/darwin/dev.docker.plist.erb'),
+      group   => 'wheel',
+      owner   => 'root',
+      before  => Service['docker'],
     }
   }
 

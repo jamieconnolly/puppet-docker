@@ -13,16 +13,17 @@
 
     <key>EnvironmentVariables</key>
     <dict>
-      <key>BOOT2DOCKER_DIR</key>
+      <key>DOCKER_CONFIG</key>
+      <string><%= @configdir %></string>
+      <key>MACHINE_STORAGE_PATH</key>
       <string><%= @datadir %></string>
-      <key>BOOT2DOCKER_PROFILE</key>
-      <string><%= @configdir %>/profile</string>
     </dict>
 
     <key>ProgramArguments</key>
     <array>
-      <string><%= scope.lookupvar "boxen::config::homebrewdir" %>/bin/boot2docker</string>
+      <string><%= @executable %></string>
       <string>start</string>
+      <string><%= @machinename %></string>
     </array>
 
     <key>RunAtLoad</key>
